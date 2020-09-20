@@ -13,14 +13,14 @@ public class HeapSort {
      * First we build a max-heap (first cycle).
      * Second we replace first with last element of heap
        and reduce the size of heap (n). We repeat this step
-       while the size of heap is bigger than 1 (n > 1).
+       while the size of heap is bigger than 1 (n > 0).
      */
     public void sort(int[] arr){
         int n = arr.length;
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
         }
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n - 1; i > 0; i--) {
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
