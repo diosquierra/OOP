@@ -1,12 +1,4 @@
 public class HeapSort {
-
-    /**
-     * Constructor of HeapSort class
-     */
-    public HeapSort(){
-
-    }
-
     /**
      * Sort is public method which is sorting array "int[] arr"
        with help of private method heapify.
