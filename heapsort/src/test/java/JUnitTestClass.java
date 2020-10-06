@@ -1,5 +1,7 @@
-import nsu.oop.heapsort.HeapSort;
+package nsu.oop.heapsort;
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class JUnitTestClass {
@@ -45,5 +47,17 @@ class JUnitTestClass {
         int[] test6s = {-1000, -19, 1, 49, 59, 60, 100};
         sorting.sort(test6);
         assertArrayEquals(test6, test6s);
+    }
+    @Test
+    void testSeven(){
+        int[] test7 = new int[300];
+        int[] test7s = new int[300];
+        for(int i = 0; i < test7.length; i++){
+            test7[i] = (int) ((Math.random() * 30) - 15);
+            test7s[i] = test7[i];
+        }
+        sorting.sort(test7);
+        Arrays.sort(test7s);
+        assertArrayEquals(test7, test7s);
     }
 }
