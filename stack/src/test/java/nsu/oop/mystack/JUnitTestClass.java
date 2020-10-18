@@ -1,228 +1,262 @@
 package nsu.oop.mystack;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JUnitTestClass {
     @Test
-    void testByte(){
-        byte[] test1 = new byte[3];
-        byte[] test1s = {1, 3, 4};
-        byte testByteVar1;
-        byte testByteVar1S = 2;
+    void testUniversalStack(){
+        MyStack<Object> testStack = new MyStack<>(9);
+        testStack.push((byte) 1);
+        testStack.push((short) 2);
+        testStack.push(3);
+        testStack.push((long) 4);
+        testStack.push(2.5f);
+        testStack.push(3.55);
+        testStack.push('a');
+        testStack.push("Hello world!");
+        testStack.push(true);
+
+        assertEquals(testStack.pop(), true);
+        assertEquals(testStack.pop(), "Hello world!");
+        assertEquals(testStack.pop(), 'a');
+        assertEquals(testStack.pop(), 3.55);
+        assertEquals(testStack.pop(), 2.5f);
+        assertEquals(testStack.pop(), (long) 4);
+        assertEquals(testStack.pop(), 3);
+        assertEquals(testStack.pop(), (short) 2);
+        assertEquals(testStack.pop(), (byte) 1);
+    }
+
+    @Test
+    void testSomeStacks(){
+        MyStack<Integer> testStackOne = new MyStack<>(4);
+        MyStack<Integer> testStackTwo = new MyStack<>(5);
+        int stackOneCount;
+        int stackOneCountS = 4;
+        int stackTwoCount;
+        int stackTwoCountS = 5;
+
+        testStackOne.push(5);
+        testStackTwo.push(1);
+        testStackOne.push(6);
+        testStackTwo.push(2);
+        testStackOne.push(7);
+        testStackTwo.push(3);
+        testStackOne.push(8);
+        testStackTwo.push(4);
+        testStackTwo.push(5);
+        stackOneCount = testStackOne.count();
+        stackTwoCount = testStackTwo.count();
+
+        assertEquals(testStackOne.pop(), 8);
+        assertEquals(testStackOne.pop(), 7);
+        assertEquals(testStackOne.pop(), 6);
+        assertEquals(testStackOne.pop(), 5);
+        assertEquals(testStackTwo.pop(), 5);
+        assertEquals(testStackTwo.pop(), 4);
+        assertEquals(testStackTwo.pop(), 3);
+        assertEquals(testStackTwo.pop(), 2);
+        assertEquals(testStackTwo.pop(), 1);
+        assertEquals(stackOneCount, stackOneCountS);
+        assertEquals(stackTwoCount, stackTwoCountS);
+    }
+
+    @Test
+    void testByte() {
+        MyStack<Byte> testByte = new MyStack<>(3);
+        byte testBytePop;
+        byte testBytePopS = 2;
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtByte testByte = new MyStack.CrtByte(test1);
-
         testByte.push((byte) 1);
         testByte.push((byte) 2);
-        testByteVar1 = testByte.pop();
+        testBytePop = testByte.pop();
         testByte.push((byte) 3);
         testByte.push((byte) 4);
         testCount = testByte.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testByteVar1, testByteVar1S);
+        assertEquals(testBytePop, testBytePopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testByte.pop(), (byte) 4);
+        assertEquals(testByte.pop(), (byte) 3);
+        assertEquals(testByte.pop(), (byte) 1);
     }
 
     @Test
-    void testShort(){
-        short[] test1 = new short[3];
-        short[] test1s = {1, 3, 4};
-        short testShortVar1;
-        short testShortVar1S = 2;
+    void testShort() {
+        MyStack<Short> testShort = new MyStack<>(3);
+        short testShortPop;
+        short testShortPopS = 2;
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtShort testShort = new MyStack.CrtShort(test1);
-
         testShort.push((short) 1);
         testShort.push((short) 2);
-        testShortVar1 = testShort.pop();
+        testShortPop = testShort.pop();
         testShort.push((short) 3);
         testShort.push((short) 4);
         testCount = testShort.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testShortVar1, testShortVar1S);
+        assertEquals(testShortPop, testShortPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testShort.pop(), (short) 4);
+        assertEquals(testShort.pop(), (short) 3);
+        assertEquals(testShort.pop(), (short) 1);
     }
 
     @Test
-    void testInteger(){
-        int[] test1 = new int[4];
-        int[] test1s = {1, 2, 5, 6};
-        int testIntVar1;
-        int testIntVar1S = 3;
-        int testCount;
-        int testCountS = 4;
-
-        int[] test2 = new int[3];
-        int[] test2s = {10, 8, 7};
-
-        MyStack.CrtInt testInt1 = new MyStack.CrtInt(test1);
-        MyStack.CrtInt testInt2 = new MyStack.CrtInt(test2);
-
-        testInt1.push(1);
-        testInt1.push(2);
-        testInt1.push(3);
-        testInt1.push(4);
-        testInt1.pop();
-        testIntVar1 = testInt1.pop();
-        testInt1.push(5);
-        testInt1.push(6);
-        testCount = testInt1.count();
-
-        testInt2.push(10);
-        testInt2.push(9);
-        testInt2.pop();
-        testInt2.push(8);
-        testInt2.push(7);
-
-        assertArrayEquals(test1, test1s);
-        assertArrayEquals(test2, test2s);
-        assertEquals(testIntVar1, testIntVar1S);
-        assertEquals(testCount, testCountS);
-    }
-
-    @Test
-    void testLong(){
-        long[] test1 = new long[3];
-        long[] test1s = {1, 3, 4};
-        long testLongVar1;
-        long testLongVar1S = 2;
+    void testInteger() {
+        MyStack<Integer> testInteger = new MyStack<>(3);
+        int testIntegerPop;
+        int testIntegerPopS = 2;
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtLong testLong = new MyStack.CrtLong(test1);
+        testInteger.push(1);
+        testInteger.push(2);
+        testIntegerPop = testInteger.pop();
+        testInteger.push(3);
+        testInteger.push(4);
+        testCount = testInteger.count();
 
-        testLong.push(1);
-        testLong.push(2);
-        testLongVar1 = testLong.pop();
-        testLong.push(3);
-        testLong.push(4);
+        assertEquals(testIntegerPop, testIntegerPopS);
+        assertEquals(testCount, testCountS);
+        assertEquals(testInteger.pop(), 4);
+        assertEquals(testInteger.pop(), 3);
+        assertEquals(testInteger.pop(), 1);
+    }
+
+    @Test
+    void testLong() {
+        MyStack<Long> testLong = new MyStack<>(3);
+        long testLongPop;
+        long testLongPopS = 2;
+        int testCount;
+        int testCountS = 3;
+
+        testLong.push((long) 1);
+        testLong.push((long) 2);
+        testLongPop = testLong.pop();
+        testLong.push((long) 3);
+        testLong.push((long) 4);
         testCount = testLong.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testLongVar1, testLongVar1S);
+        assertEquals(testLongPop, testLongPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testLong.pop(), (long) 4);
+        assertEquals(testLong.pop(), (long) 3);
+        assertEquals(testLong.pop(), (long) 1);
     }
 
     @Test
-    void testFloat(){
-        float[] test1 = new float[3];
-        float[] test1s = {1.3f, 3.5f, 4.89f};
-        float testFloatVar1;
-        float testFloatVar1S = 2.123f;
+    void testFloat() {
+        MyStack<Float> testFloat = new MyStack<>(3);
+        float testFloatPop;
+        float testFloatPopS = 2.4f;
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtFloat testFloat = new MyStack.CrtFloat(test1);
-
-        testFloat.push(1.3f);
-        testFloat.push(2.123f);
-        testFloatVar1 = testFloat.pop();
-        testFloat.push(3.5f);
-        testFloat.push(4.89f);
+        testFloat.push(1.5f);
+        testFloat.push(2.4f);
+        testFloatPop = testFloat.pop();
+        testFloat.push(3.67f);
+        testFloat.push(4.598f);
         testCount = testFloat.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testFloatVar1, testFloatVar1S);
+        assertEquals(testFloatPop, testFloatPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testFloat.pop(), 4.598f);
+        assertEquals(testFloat.pop(), 3.67f);
+        assertEquals(testFloat.pop(), 1.5f);
     }
 
     @Test
-    void testDouble(){
-        double[] test1 = new double[3];
-        double[] test1s = {1.3, 3.5, 4.89};
-        double testDoubleVar1;
-        double testDoubleVar1S = 2.123;
+    void testDouble() {
+        MyStack<Double> testDouble = new MyStack<>(3);
+        double testDoublePop;
+        double testDoublePopS = 2.4;
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtDouble testDouble = new MyStack.CrtDouble(test1);
-
-        testDouble.push(1.3);
-        testDouble.push(2.123);
-        testDoubleVar1 = testDouble.pop();
-        testDouble.push(3.5);
-        testDouble.push(4.89);
+        testDouble.push(1.5);
+        testDouble.push(2.4);
+        testDoublePop = testDouble.pop();
+        testDouble.push(3.67);
+        testDouble.push(4.598);
         testCount = testDouble.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testDoubleVar1, testDoubleVar1S);
+        assertEquals(testDoublePop, testDoublePopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testDouble.pop(), 4.598);
+        assertEquals(testDouble.pop(), 3.67);
+        assertEquals(testDouble.pop(), 1.5);
     }
 
     @Test
-    void testBoolean(){
-        boolean[] test1 = new boolean[3];
-        boolean[] test1s = {true, false, false};
-        boolean testBooleanVar1;
-        boolean testBooleanVar1S = false;
+    void testBoolean() {
+        MyStack<Boolean> testBoolean = new MyStack<>(3);
+        boolean testBooleanPop;
+        boolean testBooleanPopS = false;
         int testCount;
         int testCountS = 3;
-
-        MyStack.CrtBoolean testBoolean = new MyStack.CrtBoolean(test1);
 
         testBoolean.push(true);
         testBoolean.push(false);
-        testBooleanVar1 = testBoolean.pop();
+        testBooleanPop = testBoolean.pop();
         testBoolean.push(false);
         testBoolean.push(false);
         testCount = testBoolean.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testBooleanVar1, testBooleanVar1S);
+        assertEquals(testBooleanPop, testBooleanPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testBoolean.pop(), false);
+        assertEquals(testBoolean.pop(), false);
+        assertEquals(testBoolean.pop(), true);
     }
 
     @Test
-    void testChar(){
-        char[] test1 = new char[3];
-        char[] test1s = {'v', 'm', 'c'};
-        char testCharVar1;
-        char testCharVar1S = 'a';
+    void testCharacter() {
+        MyStack<Character> testCharacter = new MyStack<>(3);
+        char testCharacterPop;
+        char testCharacterPopS = 'a';
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtChar testChar= new MyStack.CrtChar(test1);
+        testCharacter.push('b');
+        testCharacter.push('a');
+        testCharacterPop = testCharacter.pop();
+        testCharacter.push('c');
+        testCharacter.push('d');
+        testCount = testCharacter.count();
 
-        testChar.push('v');
-        testChar.push('a');
-        testCharVar1 = testChar.pop();
-        testChar.push('m');
-        testChar.push('c');
-        testCount = testChar.count();
-
-        assertArrayEquals(test1, test1s);
-        assertEquals(testCharVar1, testCharVar1S);
+        assertEquals(testCharacterPop, testCharacterPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testCharacter.pop(), 'd');
+        assertEquals(testCharacter.pop(), 'c');
+        assertEquals(testCharacter.pop(), 'b');
     }
 
     @Test
-    void testString(){
-        String[] test1 = new String[3];
-        String[] test1s = {"Jesus Christ", "Mercury", "Mars"};
-        String testStringVar1;
-        String testStringVar1S = "Pluto";
+    void testString() {
+        MyStack<String> testString = new MyStack<>(3);
+        String testStringPop;
+        String testStringPopS = "is";
         int testCount;
         int testCountS = 3;
 
-        MyStack.CrtString testString= new MyStack.CrtString(test1);
-
-        testString.push("Jesus Christ");
-        testString.push("Pluto");
-        testStringVar1 = testString.pop();
-        testString.push("Mercury");
-        testString.push("Mars");
+        testString.push("This");
+        testString.push("is");
+        testStringPop = testString.pop();
+        testString.push("String");
+        testString.push("type");
         testCount = testString.count();
 
-        assertArrayEquals(test1, test1s);
-        assertEquals(testStringVar1, testStringVar1S);
+        assertEquals(testStringPop, testStringPopS);
         assertEquals(testCount, testCountS);
+        assertEquals(testString.pop(), "type");
+        assertEquals(testString.pop(), "String");
+        assertEquals(testString.pop(), "This");
     }
 }
