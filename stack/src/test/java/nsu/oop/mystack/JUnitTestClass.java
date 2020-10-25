@@ -1,9 +1,44 @@
 package nsu.oop.mystack;
 
 import org.junit.jupiter.api.Test;
+import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JUnitTestClass {
+    @Test
+    void testRealloc(){
+        MyStack<Integer> testStack = new MyStack<>(2);
+        testStack.push(1);
+        testStack.push(2);
+        testStack.push(3);
+        assertEquals(3, testStack.pop());
+        assertEquals(2, testStack.pop());
+        assertEquals(1, testStack.pop());
+    }
+
+    @Test
+    void testExceptions() throws NoSuchElementException {
+        MyStack<Integer> testStack = new MyStack<>(2);
+        testStack.push(1);
+        testStack.push(2);
+        testStack.pop();
+        testStack.pop();
+        Throwable thrown = assertThrows(NoSuchElementException.class, () -> {
+            testStack.pop();
+        });
+    }
+
+    @Test
+    void testTask(){
+        MyStack<Object> testStack = new MyStack<>(3);
+        testStack.push(2);
+        testStack.push(7);
+        testStack.pop();
+        testStack.count();
+        assertEquals(2, testStack.pop());
+    }
+
     @Test
     void testUniversalStack(){
         MyStack<Object> testStack = new MyStack<>(9);
