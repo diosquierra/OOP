@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 
 
-public class MyStack<T> implements Iterable<T>, Iterator<T> {
+public class MyStack<T> implements Iterable<T>{
     private int index = 0;
     private int stackSize;
 
@@ -59,24 +59,29 @@ public class MyStack<T> implements Iterable<T>, Iterator<T> {
         return index;
     }
 
-    @Override
-    public boolean hasNext(){
-        if(index == 0){
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public T next(){
-        if(hasNext() == false){
-            throw new NoSuchElementException("Stack is empty");
+    class MyStackIterator<T> implements Iterator<T>{
+        @Override
+        public boolean hasNext(){
+            if(index == 0){
+                return false;
+            }
+            return true;
         }
-        return pop();
+
+        @Override
+        public T next(){
+            if(hasNext() == false){
+                throw new NoSuchElementException("Stack is empty");
+            }
+            return (T) pop();
+        }
+
+
     }
 
     @Override
     public Iterator<T> iterator() {
-        return this;
+        return new MyStackIterator<>();
     }
 }
