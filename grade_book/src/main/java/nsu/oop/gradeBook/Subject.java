@@ -16,7 +16,7 @@ public class Subject {
     public Subject(String subjectName){
         this.subjectName = subjectName;
         for(int i = 0; i < 9; i++){
-            grades[i] = Mark.Undefined;
+            grades[i] = Mark.UNDEFINED;
         }
     }
 
@@ -38,7 +38,7 @@ public class Subject {
      * @return int value instead of Mark value
      */
     public int returnMark(int semester){
-        return Mark.markToInt(grades[semester]);
+        return (grades[semester]).ordinal();
     }
 
     /**
@@ -49,7 +49,7 @@ public class Subject {
     public double returnSum(){
         int sum = 0;
         for(Mark a : grades){
-            sum += Mark.markToInt(a);
+            sum += a.ordinal();
         }
         return sum;
     }
@@ -71,7 +71,7 @@ public class Subject {
     public double returnCountFives(){
         int count = 0;
         for(Mark mark : grades){
-            if(Mark.markToInt(mark) == 5){
+            if(mark.ordinal() == 5){
                 count++;
             }
         }
@@ -85,7 +85,7 @@ public class Subject {
      */
     public boolean returnIfMarkThree(){
         for(Mark mark : grades){
-            if(Mark.markToInt(mark) <= 3 && Mark.markToInt(mark) != 0){
+            if(mark.ordinal() <= 3 && mark.ordinal() != 0){
                 return true;
             }
         }

@@ -7,12 +7,12 @@ public enum Mark {
     /**
      * Marks list
      */
-    Undefined,
-    One,
-    Failed,
-    Satisfactory,
-    Good,
-    Excellent;
+    UNDEFINED,
+    ONE,
+    FAILED,
+    SATISFACTORY,
+    GOOD,
+    EXCELLENT;
 
     /**
      * Public static method intToMark.
@@ -24,44 +24,18 @@ public enum Mark {
     public static Mark intToMark(int mark){
         switch (mark){
             case 0:
-                return Undefined;
+                return UNDEFINED;
             case 1:
-                return One;
+                return ONE;
             case 2:
-                return Failed;
+                return FAILED;
             case 3:
-                return Satisfactory;
+                return SATISFACTORY;
             case 4:
-                return Good;
+                return GOOD;
             case 5:
-                return Excellent;
+                return EXCELLENT;
         }
         throw new IllegalArgumentException("Incorrect mark!");
     }
-
-    /**
-     * Public static method markToInt.
-     * This method convert Mark value into int value.
-     * @param mark - Mark value.
-     * @return int value.
-     * @throws IllegalArgumentException if mark is incorrect.
-     */
-    public static int markToInt(Mark mark){
-        switch(mark){
-            case Undefined:
-                return 0;
-            case One:
-                return 1;
-            case Failed:
-                return 2;
-            case Satisfactory:
-                return 3;
-            case Good:
-                return 4;
-            case Excellent:
-                return 5;
-        }
-        throw new IllegalArgumentException("Incorrect mark!");
-    }
-
 }
