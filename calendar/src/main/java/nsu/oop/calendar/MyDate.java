@@ -1,15 +1,30 @@
 package nsu.oop.calendar;
 
-import java.time.format.DateTimeParseException;
-
+/**
+ * MyDate is class which realises date
+ */
 public class MyDate {
+    /**
+     * Fields.
+     */
     int day;
     int month;
     int year;
 
+    /**
+     * Constructor with no fields.
+     */
     public MyDate(){
 
     }
+
+    /**
+     * Constructor with fields: day, month, year.
+     * @param day
+     * @param month
+     * @param year
+     * @throws IllegalArgumentException if date is incorrect.
+     */
     public MyDate(int day, int month, int year){
         if(year < 0){
             throw new IllegalArgumentException("Incorrect date! Illegal year!");
@@ -30,11 +45,5 @@ public class MyDate {
         this.day = day;
         this.month = month;
         this.year = year;
-    }
-    public String daysofdate(){
-        if((Integer)day == null || (Integer)month == null || (Integer)year == null){
-            throw new IllegalStateException("Date wasn't initialized!");
-        }
-        return null;
     }
 }

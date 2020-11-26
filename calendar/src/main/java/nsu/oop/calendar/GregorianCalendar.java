@@ -1,9 +1,16 @@
 package nsu.oop.calendar;
 
 /**
- * 
+ * GregorianCalendar class realises operations with MyDate class
  */
 public class GregorianCalendar {
+    /**
+     * getNameOfWeek is public static method which is calculating
+     * name of day of week using offsets.
+     *
+     * @param date
+     * @return name of week as String.
+     */
     public static String getNameOfWeek(MyDate date){
         int day;
 
@@ -102,6 +109,13 @@ public class GregorianCalendar {
         throw new IllegalStateException("Illegal data!");
     }
 
+    /**
+     * dateSubDate is public static method which is calculating
+     * amount of days between two dates (dateTwo - dateOne).
+     * @param dateOne - first date.
+     * @param dateTwo - second date.
+     * @return MyDate result - amount of days in days, months, years.
+     */
     public static MyDate dateSubDate(MyDate dateOne, MyDate dateTwo){
         MyDate returnDate = new MyDate();
         returnDate.year = dateTwo.year - dateOne.year;
@@ -133,6 +147,13 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * datePlusDay is public static method which is calculating
+     * date after amount of days.
+     * @param date - date.
+     * @param days - amount of days.
+     * @return MyDate returnDate - result
+     */
     public static MyDate datePlusDay(MyDate date, int days){
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         int dayPull = days;
@@ -180,6 +201,13 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * daysInMonth is private static method which is calculating
+     * how many days in current months.
+     * @param month - month.
+     * @param year - year.
+     * @return int - amount of days in current month.
+     */
     private static int daysInMonth(int month, int year){
         if (isYearLeap(year)) {
             if (month == 2) {
@@ -201,6 +229,13 @@ public class GregorianCalendar {
         throw new IllegalArgumentException("Illegal month");
     }
 
+    /**
+     * dateSubDay is public static method which is calculating
+     * date before amount of days.
+     * @param date - date.
+     * @param days - amount of days.
+     * @return MyDate returnDate - result
+     */
     public static MyDate dateSubDays(MyDate date, int days){
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         int dayPull = days;
@@ -260,6 +295,13 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * datePlusMonth is public static method which is calculating
+     * date after amount of months.
+     * @param date - date.
+     * @param months - amount of months.
+     * @return MyDate returnDate - result.
+     */
     public static MyDate datePlusMonth(MyDate date, int months){
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         if (returnDate.month + months <= 12) {
@@ -281,7 +323,14 @@ public class GregorianCalendar {
         return returnDate;
     }
 
-    public static MyDate dateSubMonth(MyDate date, int months){
+  /**
+   * dateSubMonth is public static method which is calculating
+   * date before amount of months.
+   * @param date - date.
+   * @param months - amount of months.
+   * @return MyDate returnDate - result.
+   */
+  public static MyDate dateSubMonth(MyDate date, int months) {
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         if (returnDate.month - months >= 1) {
             returnDate.month -= months;
@@ -308,6 +357,13 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * datePlusYear is public static method which is calculating
+     * date after amount of years.
+     * @param date - date.
+     * @param year - amount of years.
+     * @return MyDate returnDate - result.
+     */
     public static MyDate datePlusYear(MyDate date, int year){
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         returnDate.year += year;
@@ -323,6 +379,13 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * dateSubYear is public static method which is calculating
+     * date before amount of years.
+     * @param date - date.
+     * @param year - amount of years.
+     * @return MyDate returnDate - result.
+     */
     public static MyDate dateSubYear(MyDate date, int year){
         MyDate returnDate = new MyDate(date.day, date.month, date.year);
         returnDate.year -= year;
@@ -338,6 +401,12 @@ public class GregorianCalendar {
         return returnDate;
     }
 
+    /**
+     * isYearLeap is private static method which is calculating
+     * is this year leap.
+     * @param year - year.
+     * @return boolean. If year is leap - true, else - false.
+     */
     private static boolean isYearLeap(int year){
         if(year % 400 == 0){
             return true;
