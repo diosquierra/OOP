@@ -1,34 +1,59 @@
 package nsu.oop.calendar;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import java.util.Date;
-//import java.util.Calendar;
 
 public class GregorianCalendarJUnitTest {
     @Test
-    void testOne(){
-        Date test = new Date(15,7,1921);
-        Date test1 = new Date(23,6, 1986);
-        Date test2 = new Date(20,11, 2020);
-        Date test3 = new Date();
-        Date test4 = new Date();
-
-        test3 = GregorianCalendar.datePlusMonth(test2, -50);
-        test4 = GregorianCalendar.dateSubMonth(test2, 50);
-
-        //System.out.println(GregorianCalendar.getNameOfWeek(test1));
-        //System.out.println(GregorianCalendar.getNameOfWeek(test2));
-        int a = 0;
-
-
+    void requestedTestOne(){
+        MyDate today = new MyDate(26,11,2020);
+        MyDate result;
+        result = GregorianCalendar.datePlusDay(today, 1024);
+        assertEquals(16,result.day);
+        assertEquals(9,result.month);
+        assertEquals(2023,result.year); //https://planetcalc.ru/410/
     }
     @Test
     void requestedTestTwo(){
-
+        MyDate today = new MyDate(26,11,2020);
+        MyDate victory = new MyDate(9,5,1945);
+        MyDate result;
+        result = GregorianCalendar.dateSubDate(victory, today);
+        assertEquals(17,result.day);
+        assertEquals(6,result.month);
+        assertEquals(75,result.year); //https://planetcalc.ru/274/
     }
     @Test
     void requestedTestThree(){
-        Date birthday = new Date(29,1,2001);
-        assertEquals("Monday", GregorianCalendar.getNameOfWeek(birthday));
+        MyDate birthday = new MyDate(29,1,2001);
+        assertEquals("Monday", GregorianCalendar.getNameOfWeek(birthday)); //calendar
+    }
+    @Test
+    void requestedTestFour(){
+        MyDate today = new MyDate(26,11,2020);
+        MyDate result;
+        result = GregorianCalendar.datePlusDay(today, 17 * 7);
+        assertEquals(25, result.day);
+        assertEquals(3, result.month);
+        assertEquals(2021, result.year); //https://planetcalc.ru/410/
+    }
+    @Test
+    void requestedTestFive(){
+        MyDate today = new MyDate(26,11,2020);
+        MyDate newYear = new MyDate(1,1,2021);
+        MyDate result;
+        result = GregorianCalendar.dateSubDate(today, newYear);
+        assertEquals(6,result.day);
+        assertEquals(1,result.month);
+        assertEquals(0,result.year); //https://planetcalc.ru/274/
+    }
+    @Test
+    void requestedTestSix(){
+        MyDate result = new MyDate(13,12,2020);
+        while(GregorianCalendar.getNameOfWeek(result) != "Friday"){
+            result = GregorianCalendar.datePlusMonth(result, 1);
+        }
+        assertEquals(13,result.day);
+        assertEquals(8,result.month);
+        assertEquals(2021,result.year); //calendar
     }
 }

@@ -1,7 +1,10 @@
 package nsu.oop.calendar;
 
-public class GregorianCalendar{
-    public static String getNameOfWeek(Date date){
+/**
+ * 
+ */
+public class GregorianCalendar {
+    public static String getNameOfWeek(MyDate date){
         int day;
 
         int centuryOffset;
@@ -99,8 +102,8 @@ public class GregorianCalendar{
         throw new IllegalStateException("Illegal data!");
     }
 
-    public static Date dateSubDate(Date dateOne, Date dateTwo){
-        Date returnDate = new Date();
+    public static MyDate dateSubDate(MyDate dateOne, MyDate dateTwo){
+        MyDate returnDate = new MyDate();
         returnDate.year = dateTwo.year - dateOne.year;
         if(dateTwo.month - dateOne.month > 0){
             returnDate.month = dateTwo.month - dateOne.month;
@@ -111,8 +114,8 @@ public class GregorianCalendar{
         if(dateTwo.day - dateOne.day > 0){
             returnDate.day = dateTwo.day - dateOne.day;
         }else{
-            returnDate.day = 1 + (dateOne.day - dateTwo.day);
             returnDate.month--;
+            returnDate.day = daysInMonth(returnDate.month, returnDate.year) - (dateOne.day - dateTwo.day);
             if(returnDate.month <= 0){
                 returnDate.month = 12 - (dateOne.month - dateTwo.month);
                 returnDate.year--;
@@ -130,8 +133,8 @@ public class GregorianCalendar{
         return returnDate;
     }
 
-    public static Date datePlusDay(Date date, int days){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate datePlusDay(MyDate date, int days){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         int dayPull = days;
         while(dayPull / 365 > 0){
             if(isYearLeap(returnDate.year)){
@@ -145,6 +148,7 @@ public class GregorianCalendar{
             returnDate.month++;
             if(returnDate.month > 12){
                 returnDate.month = 1;
+                returnDate.year++;
             }
         }
         if (dayPull >= 28){
@@ -166,10 +170,11 @@ public class GregorianCalendar{
         }
         returnDate.day = returnDate.day + dayPull;
         if(returnDate.day > daysInMonth(returnDate.month, returnDate.year)){
-            returnDate.day = 1 + (returnDate.day - daysInMonth(returnDate.month, returnDate.year));
+            returnDate.day = returnDate.day - daysInMonth(returnDate.month, returnDate.year);
             returnDate.month++;
             if(returnDate.month > 12){
                 returnDate.month = 1;
+                returnDate.year++;
             }
         }
         return returnDate;
@@ -196,8 +201,8 @@ public class GregorianCalendar{
         throw new IllegalArgumentException("Illegal month");
     }
 
-    public static Date dateSubDays(Date date, int days){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate dateSubDays(MyDate date, int days){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         int dayPull = days;
         while(dayPull / 365 > 0){
             if(isYearLeap(returnDate.year)){
@@ -212,6 +217,7 @@ public class GregorianCalendar{
             dayPull -= daysInMonth(returnDate.month, returnDate.year);
             if(returnDate.month == 0){
                 returnDate.month = 12;
+                returnDate.year--;
             }
         }
         if (dayPull >= 28){
@@ -229,6 +235,7 @@ public class GregorianCalendar{
             }
             if(returnDate.month > 12){
                 returnDate.month = 1;
+                returnDate.year++;
             }
         }
         returnDate.day = returnDate.day - dayPull;
@@ -243,16 +250,18 @@ public class GregorianCalendar{
             }
             if(returnDate.month > 12){
                 returnDate.month = 1;
+                returnDate.year++;
             }
             if(returnDate.month <= 0){
                 returnDate.month = 12;
+                returnDate.year--;
             }
         }
         return returnDate;
     }
 
-    public static Date datePlusMonth(Date date, int months){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate datePlusMonth(MyDate date, int months){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         if (returnDate.month + months <= 12) {
             returnDate.month += months;
         }else{
@@ -264,12 +273,16 @@ public class GregorianCalendar{
         if(daysInCurrent < returnDate.day){
             returnDate.day -= daysInCurrent;
             returnDate.month++;
+            if(returnDate.month > 12){
+                returnDate.month = 1;
+                returnDate.year++;
+            }
         }
         return returnDate;
     }
 
-    public static Date dateSubMonth(Date date, int months){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate dateSubMonth(MyDate date, int months){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         if (returnDate.month - months >= 1) {
             returnDate.month -= months;
         }else{
@@ -286,29 +299,41 @@ public class GregorianCalendar{
             if(daysInCurrent < returnDate.day){
                 returnDate.day -= daysInCurrent;
                 returnDate.month++;
+                if(returnDate.month > 12){
+                    returnDate.month = 1;
+                    returnDate.year++;
+                }
             }
         }
         return returnDate;
     }
 
-    public static Date datePlusYear(Date date, int year){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate datePlusYear(MyDate date, int year){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         returnDate.year += year;
         int daysInCurrent = daysInMonth(returnDate.month, returnDate.year);
         if(daysInCurrent < returnDate.day){
             returnDate.day -= daysInCurrent;
             returnDate.month++;
+            if(returnDate.month > 12){
+                returnDate.month = 1;
+                returnDate.year++;
+            }
         }
         return returnDate;
     }
 
-    public static Date dateSubYear(Date date, int year){
-        Date returnDate = new Date(date.day, date.month, date.year);
+    public static MyDate dateSubYear(MyDate date, int year){
+        MyDate returnDate = new MyDate(date.day, date.month, date.year);
         returnDate.year -= year;
         int daysInCurrent = daysInMonth(returnDate.month, returnDate.year);
         if(daysInCurrent < returnDate.day){
             returnDate.day -= daysInCurrent;
             returnDate.month++;
+            if(returnDate.month > 12){
+                returnDate.month = 1;
+                returnDate.year++;
+            }
         }
         return returnDate;
     }

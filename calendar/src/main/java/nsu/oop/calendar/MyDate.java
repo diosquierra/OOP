@@ -1,13 +1,16 @@
 package nsu.oop.calendar;
 
-public class Date {
+import java.time.format.DateTimeParseException;
+
+public class MyDate {
     int day;
     int month;
     int year;
-    public Date(){
+
+    public MyDate(){
 
     }
-    public Date(int day, int month, int year){
+    public MyDate(int day, int month, int year){
         if(year < 0){
             throw new IllegalArgumentException("Incorrect date! Illegal year!");
         }
@@ -27,5 +30,11 @@ public class Date {
         this.day = day;
         this.month = month;
         this.year = year;
+    }
+    public String daysofdate(){
+        if((Integer)day == null || (Integer)month == null || (Integer)year == null){
+            throw new IllegalStateException("Date wasn't initialized!");
+        }
+        return null;
     }
 }
