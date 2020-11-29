@@ -8,10 +8,10 @@ public class GregorianCalendar {
      * getNameOfWeek is public static method which is calculating
      * name of day of week using offsets.
      *
-     * @param date
+     * @param date - date.
      * @return name of week as String.
      */
-    public static String getNameOfWeek(MyDate date){
+    public static DayOfWeek getNameOfWeek(MyDate date){
         int day;
 
         int centuryOffset;
@@ -45,68 +45,51 @@ public class GregorianCalendar {
             yearOffset--;
         }
 
-        switch(date.month){
-            case 1:
-                monthOffset = 0;
-                break;
-            case 2:
-                monthOffset = 3;
-                break;
-            case 3:
-                monthOffset = 3;
-                break;
-            case 4:
-                monthOffset = 6;
-                break;
-            case 5:
-                monthOffset = 1;
-                break;
-            case 6:
-                monthOffset = 4;
-                break;
-            case 7:
-                monthOffset = 6;
-                break;
-            case 8:
-                monthOffset = 2;
-                break;
-            case 9:
-                monthOffset = 5;
-                break;
-            case 10:
-                monthOffset = 0;
-                break;
-            case 11:
-                monthOffset = 3;
-                break;
-            case 12:
-                monthOffset = 5;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + date.month);
-        }
+        monthOffset = getMonthOffset(date.month);
 
         dayOffset = date.day % 7;
 
         day = (centuryOffset + yearOffset + monthOffset + dayOffset) % 7;
+        DayOfWeek[] returnDayArray = DayOfWeek.values();
+        return returnDayArray[day];
+    }
 
-        switch(day){
-            case 0:
-                return "Sunday";
+    /**
+     * getMonthOffset is private static method which
+     * calculates month offset.
+     * @param month - month.
+     * @return month offset.
+     * @throws IllegalArgumentException if month is incorrect.
+     */
+    private static int getMonthOffset(int month){
+        switch(month){
             case 1:
-                return "Monday";
+                return 0;
             case 2:
-                return "Tuesday";
+                return 3;
             case 3:
-                return "Wednesday";
+                return 3;
             case 4:
-                return "Thursday";
+                return 6;
             case 5:
-                return "Friday";
+                return 1;
             case 6:
-                return "Saturday";
+                return 4;
+            case 7:
+                return 6;
+            case 8:
+                return 2;
+            case 9:
+                return 5;
+            case 10:
+                return 0;
+            case 11:
+                return 3;
+            case 12:
+                return 5;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + month);
         }
-        throw new IllegalStateException("Illegal data!");
     }
 
     /**

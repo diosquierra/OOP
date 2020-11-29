@@ -25,7 +25,7 @@ public class GregorianCalendarJUnitTest {
     @Test
     void requestedTestThree(){
         MyDate birthday = new MyDate(29,1,2001);
-        assertEquals("Monday", GregorianCalendar.getNameOfWeek(birthday)); //calendar
+        assertEquals(DayOfWeek.MONDAY, GregorianCalendar.getNameOfWeek(birthday)); //calendar
     }
     @Test
     void requestedTestFour(){
@@ -49,7 +49,7 @@ public class GregorianCalendarJUnitTest {
     @Test
     void requestedTestSix(){
         MyDate result = new MyDate(13,12,2020);
-        while(GregorianCalendar.getNameOfWeek(result) != "Friday"){
+        while(GregorianCalendar.getNameOfWeek(result) != DayOfWeek.FRIDAY){
             result = GregorianCalendar.datePlusMonth(result, 1);
         }
         assertEquals(13,result.day);
