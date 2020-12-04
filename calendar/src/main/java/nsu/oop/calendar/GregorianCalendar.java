@@ -62,34 +62,21 @@ public class GregorianCalendar {
      * @throws IllegalArgumentException if month is incorrect.
      */
     private static int getMonthOffset(int month){
-        switch(month){
-            case 1:
-                return 0;
-            case 2:
-                return 3;
-            case 3:
-                return 3;
-            case 4:
-                return 6;
-            case 5:
-                return 1;
-            case 6:
-                return 4;
-            case 7:
-                return 6;
-            case 8:
-                return 2;
-            case 9:
-                return 5;
-            case 10:
-                return 0;
-            case 11:
-                return 3;
-            case 12:
-                return 5;
-            default:
-                throw new IllegalArgumentException("Unexpected value: " + month);
-        }
+        return switch (month) {
+            case 1 -> 0;
+            case 2 -> 3;
+            case 3 -> 3;
+            case 4 -> 6;
+            case 5 -> 1;
+            case 6 -> 4;
+            case 7 -> 6;
+            case 8 -> 2;
+            case 9 -> 5;
+            case 10 -> 0;
+            case 11 -> 3;
+            case 12 -> 5;
+            default -> throw new IllegalArgumentException("Unexpected value: " + month);
+        };
     }
 
     /**
