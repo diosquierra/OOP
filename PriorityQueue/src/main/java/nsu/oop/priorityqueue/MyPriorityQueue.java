@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * This is PriorityQueue based on binary heap.
@@ -145,6 +147,9 @@ public class MyPriorityQueue<Key extends Comparable<Key>, Value> implements Iter
         public int characteristics() {
             return SIZED;
         }
+    }
+    Stream<Node> stream() {
+        return StreamSupport.stream(new MyPriorityQueueSpliterator(), false);
     }
 
 }
