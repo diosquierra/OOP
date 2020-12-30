@@ -1,175 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.Stack;
-
-
-class SinOperator implements CalcOperator {
-
-    @Override
-    public String getOperatorRepresentation() {
-        return "sin";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        numStack.push(String.valueOf(Math.sin(Double.parseDouble(numStack.pop()))));
-    }
-
-    @Override
-    public int getArity() {
-        return 1;
-    }
-}
-
-class CosOperator implements CalcOperator {
-
-    @Override
-    public String getOperatorRepresentation() {
-        return "cos";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        numStack.push(String.valueOf(Math.cos(Double.parseDouble(numStack.pop()))));
-    }
-
-    @Override
-    public int getArity() {
-        return 1;
-    }
-}
-
-class LnOperator implements CalcOperator {
-
-    @Override
-    public String getOperatorRepresentation() {
-        return "ln";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        numStack.push(String.valueOf(Math.log(Double.parseDouble(numStack.pop()))));
-    }
-
-    @Override
-    public int getArity() {
-        return 1;
-    }
-}
-
-class PowOperator implements CalcOperator {
-
-    @Override
-    public String getOperatorRepresentation() {
-        return "pow";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        double base = Double.parseDouble(numStack.pop());
-        double power = Double.parseDouble(numStack.pop());
-        numStack.push(String.valueOf(Math.pow(base, power)));
-    }
-
-    @Override
-    public int getArity() {
-        return 2;
-    }
-}
-
-class SqrtOperator implements CalcOperator {
-
-    @Override
-    public String getOperatorRepresentation() {
-        return "sqrt";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        numStack.push(String.valueOf(Math.sqrt(Double.parseDouble(numStack.pop()))));
-    }
-
-    @Override
-    public int getArity() {
-        return 1;
-    }
-}
-
-class Plus implements CalcOperator {
-    @Override
-    public String getOperatorRepresentation() {
-        return "+";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        double l = Double.parseDouble(numStack.pop());
-        double r = Double.parseDouble(numStack.pop());
-        numStack.push(String.valueOf(l + r));
-    }
-
-    @Override
-    public int getArity() {
-        return 2;
-    }
-}
-
-class Minus implements CalcOperator {
-    @Override
-    public String getOperatorRepresentation() {
-        return "-";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        double l = Double.parseDouble(numStack.pop());
-        double r = Double.parseDouble(numStack.pop());
-        numStack.push(String.valueOf(l - r));
-    }
-
-    @Override
-    public int getArity() {
-        return 2;
-    }
-}
-
-class Multiplication implements CalcOperator {
-    @Override
-    public String getOperatorRepresentation() {
-        return "*";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        double l = Double.parseDouble(numStack.pop());
-        double r = Double.parseDouble(numStack.pop());
-        numStack.push(String.valueOf(l * r));
-    }
-
-    @Override
-    public int getArity() {
-        return 2;
-    }
-}
-
-class Division implements CalcOperator {
-    @Override
-    public String getOperatorRepresentation() {
-        return "/";
-    }
-
-    @Override
-    public void Apply(Stack<String> numStack) {
-        double l = Double.parseDouble(numStack.pop());
-        double r = Double.parseDouble(numStack.pop());
-        numStack.push(String.valueOf(l / r));
-    }
-
-    @Override
-    public int getArity() {
-        return 2;
-    }
-}
-
 public class MyCalculator {
     private final HashMap<String, CalcOperator> operators = new HashMap<>();
 
@@ -181,21 +12,21 @@ public class MyCalculator {
      */
     public String calculate(String string) {
         String[] arr = string.split(" ");
-        Stack<String> numStack = new Stack<>();
+        Deque<String> numDeque = new ArrayDeque<>();
         for (int i = arr.length - 1; i >= 0; i--) {
             String elem = arr[i];
             if (isNumber(elem)) {
-                numStack.push(elem);
+                numDeque.push(elem);
             } else if (operators.containsKey(elem)) {
-                computeOperation(elem, numStack);
+                computeOperation(elem, numDeque);
             } else {
                 throw new IllegalArgumentException("This is illegal value: " + elem);
             }
         }
-        if(numStack.size() != 1){
+        if(numDeque.size() != 1){
             throw new IllegalArgumentException("String is not computable");
         }
-        return numStack.pop();
+        return numDeque.pop();
     }
 
     /**
@@ -215,13 +46,13 @@ public class MyCalculator {
     /**
      * computeOperation is public method which is calculating an operation.
      * @param operation
-     * @param numStack - num
+     * @param numDeque - num
      */
-    private void computeOperation(String operation, Stack<String> numStack) {
-        if (numStack.size() < operators.get(operation).getArity()) {
+    private void computeOperation(String operation, Deque<String> numDeque) {
+        if (numDeque.size() < operators.get(operation).getArity()) {
             throw new IllegalArgumentException("Cannot parse this expression");
         }
-        operators.get(operation).Apply(numStack);
+        operators.get(operation).Apply(numDeque);
     }
 
     /**
