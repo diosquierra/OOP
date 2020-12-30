@@ -1,10 +1,7 @@
 package nsu.oop.priorityqueue;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 public class JunitTestClassMyPriorityQueue {
     @Test
